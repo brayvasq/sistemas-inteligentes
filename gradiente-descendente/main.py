@@ -57,20 +57,20 @@ def gradiente(axo,bxo,ayo,byo,tolerancia,tasa,max_iter = 10000):
 
         if x1 == y1:
             converged = True
-            print("Iguales")
+            #print("Iguales")
 
         if num == max_iter:
             print("Num max iter")
-            converged = True
+            #converged = True
 
         if k1 == 0 and k2==0:
             converged = True
-            print("Derivate = 0")
+            #print("Derivate = 0")
 
         if round(abs(k1),6) == round(abs(k2),6):
         #if abs(k1) == abs(k2):        
             converged = True
-            print("Derivate equals")
+            #print("Derivate equals")
 
     print("\n--------------------- Iteracion : "+str(num)+"----------------------------")
     print("Itero : ","X1" if item==0 else "X2")
