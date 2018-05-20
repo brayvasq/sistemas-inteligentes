@@ -17,7 +17,7 @@ def fibonacci(n):
 
 def busqueda_fibonacci(ao,bo,tol):
     """
-        Algoritmo de seccion dorada con fibonacci para el calculo del valor minimo
+        Algoritmo de busqueda fibonacci para el calculo del valor minimo
         para la función descrita en el metodo eval()
 
         :param: ao -> punto inicial del intervalo a evaluar
@@ -63,7 +63,7 @@ def busqueda_fibonacci(ao,bo,tol):
     print("evala : ",funcion(ao)," evalb : ",funcion(bo))
     print("ao : ",ao," bo : ",bo)
     print("Media eval : ", (funcion(ao)+funcion(bo))/2)
-    print("Media point : ",(ao+bo)/2)
+    print("Media point : ",(ao+bo)/2, " Iteraciones : ",iteraciones)
 
 
 
