@@ -6,8 +6,8 @@ def funcion(x):
 
         :return: retorna x funcionuado en la funcion -> f(x) = 8*e^(2-x) + 7*ln(x-1)
     """
-    return 8*math.exp(2-x) + 7*math.log(x-1)
-    #return (x**4) - 14 * (x**3) + 60 * (x**2) - 70 * x
+    #return 8*math.exp(2-x) + 7*math.log(x-1)
+    return (x**4) - 14 * (x**3) + 60 * (x**2) - 70 * x
 
 def aproximaciones_susecivas(ao,bo,tol,tasa):
     """
@@ -36,5 +36,5 @@ def aproximaciones_susecivas(ao,bo,tol,tasa):
         print(funcion(bo)," - bo : ",bo," - Iteraciones : ",iteraciones)
 
 if __name__ == "__main__":
-    #aproximaciones_susecivas(0,2,0.01,0.01)
-    aproximaciones_susecivas(2,3,0.1,0.1)
+    aproximaciones_susecivas(0,2,0.01,0.01)
+    #aproximaciones_susecivas(2,3,0.1,0.1)

@@ -1,5 +1,3 @@
-
-
 import math
 
 def eval(x):
