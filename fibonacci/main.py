@@ -60,10 +60,14 @@ def busqueda_fibonacci(ao,bo,tol):
 
         n -= 1
         
-    print("evala : ",funcion(ao)," evalb : ",funcion(bo))
-    print("ao : ",ao," bo : ",bo)
-    print("Media eval : ", (funcion(ao)+funcion(bo))/2)
-    print("Media point : ",(ao+bo)/2, " Iteraciones : ",iteraciones)
+    #print("evala : ",funcion(ao)," evalb : ",funcion(bo))
+    #print("ao : ",ao," bo : ",bo)
+    #print("Media eval : ", (funcion(ao)+funcion(bo))/2)
+    #print("Media point : ",(ao+bo)/2, " Iteraciones : ",iteraciones)
+    if funcion(ao) < funcion(bo):
+        print(funcion(ao)," - ao : ",ao," - Iteraciones : ",iteraciones)
+    else:
+        print(funcion(bo)," - bo : ",bo," - Iteraciones : ",iteraciones)
 
 
 

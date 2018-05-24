@@ -1,6 +1,6 @@
 import math
 
-def eval(x):
+def funcion(x):
     """
         :param: x -> punto o valor para evaluar en la funcion. Está dado en el intervalo de [2 3]
 
@@ -28,8 +28,8 @@ def seccion_dorada(ao,bo,tol):
     a1 = ao + numero_aureo * ( bo - ao ) 
     b1 = bo - numero_aureo * ( bo - ao )
     
-    evala = eval(a1)
-    evalb = eval(b1)
+    evala = funcion(a1)
+    evalb = funcion(b1)
 
     while( ( bo - ao ) > tol):
         iteraciones += 1
@@ -39,16 +39,20 @@ def seccion_dorada(ao,bo,tol):
             b1 = a1
             a1 = ao + ( bo - ao ) * numero_aureo
             evalb = evala
-            evala = eval(a1)
+            evala = funcion(a1)
         else:
             ao = a1
             a1 = b1
             b1 = bo - ( bo - ao ) * numero_aureo
             evala = evalb
-            evalb = eval(b1)
+            evalb = funcion(b1)
 
-    print( (evala + evalb)/2 ," - pos : ",(ao+bo)/2,"  - Iteraciones : ",iteraciones)
+    #print( (evala + evalb)/2 ," - pos : ",(ao+bo)/2,"  - Iteraciones : ",iteraciones)
+    if funcion(ao) < funcion(bo):
+        print(funcion(ao)," - ao : ",ao," - Iteraciones : ",iteraciones)
+    else:
+        print(funcion(bo)," - bo : ",bo," - Iteraciones : ",iteraciones)
 
 if __name__ == "__main__":
     #seccion_dorada(0,2,0.01)
-    seccion_dorada(2,3,0.1)
+    seccion_dorada(2,3,0.0001)
