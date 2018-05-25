@@ -60,18 +60,18 @@ def busqueda_fibonacci(ao,bo,tol):
 
         n -= 1
         
-    #print("evala : ",funcion(ao)," evalb : ",funcion(bo))
-    #print("ao : ",ao," bo : ",bo)
-    #print("Media eval : ", (funcion(ao)+funcion(bo))/2)
-    #print("Media point : ",(ao+bo)/2, " Iteraciones : ",iteraciones)
-    if funcion(ao) < funcion(bo):
-        print(funcion(ao)," - ao : ",ao," - Iteraciones : ",iteraciones)
-    else:
-        print(funcion(bo)," - bo : ",bo," - Iteraciones : ",iteraciones)
+    print("evala : ",funcion(ao)," evalb : ",funcion(bo))
+    print("ao : ",ao," bo : ",bo)
+    print("Media eval : ", (funcion(ao)+funcion(bo))/2)
+    print("Media point : ",(ao+bo)/2, " Iteraciones : ",iteraciones)
+    #if funcion(ao) < funcion(bo):
+    #    print(funcion(ao)," - ao : ",ao," - Iteraciones : ",iteraciones)
+    #else:
+    #    print(funcion(bo)," - bo : ",bo," - Iteraciones : ",iteraciones)
 
 
 
 
 if __name__ == "__main__":
-    busqueda_fibonacci(2,3,0.0001)
-    #busqueda_fibonacci(0,2,0.0001)
+    busqueda_fibonacci(2,3,1)
+    #busqueda_fibonacci(0,2,0.001)
