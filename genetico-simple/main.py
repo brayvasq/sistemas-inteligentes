@@ -4,7 +4,7 @@ import math
 
 num_particulas = 6
 dimensiones = 2
-max_num_iteraciones = 2000
+max_num_iteraciones = 10000
 probabilida_comb = 0.6
 prob_mut = 0.0001
 
@@ -20,7 +20,8 @@ def funcion(x):
 get_bin = lambda x, n: format(x, 'b').zfill(n)
 
 def get_binary():
-    num = random.randrange(0,1000)
+    num = random.randrange(0,1024)
+    #num = 420
     #print(num)
     numbin = get_bin(num,10);
     cad = numbin
@@ -32,12 +33,17 @@ def toBinary(n):
     
 
 def toNum(n):
-    return int(n,2)
+    val = int(n,2) - 512
+    if val > 500:
+        val = 500
+    elif val < -500:
+        val = -500
+    return val
 
 def fitness_array(x):
     valor = 0
     for i in x:
-        print(i.posx)
+        #print(i.posx)
         valor += i.fitness
     valor = valor/num_particulas
     return valor
@@ -70,27 +76,29 @@ class Cromosoma:
         self.valy = toNum(val_y)
         self.fitness = funcion([self.valx,self.valy])
 
-def convergen(x):
+def conve(x):
     val = 0
     for i in x:
-        print("Factibi  : ",i.factibilidad)
-        if i.factibilidad == 1:
+        #print("Factibi  : ",i.factibilidad)
+        if i.fitness < 1:
             val+=1
-    print("Val percent ,", val)
+    #print("Val percent ,", val)
     perc = ((val*100)/num_particulas)
     print("Porcemtaje : ",perc)
     return (perc >= 90)
+
     
 
 x = Cromosoma(dimensiones)
 swarm = [Cromosoma(dimensiones) for __x in range(num_particulas)]
 swarm_better = []#[None for __x in range(num_particulas)]
-
+#conve(swarm)
 fapt = [0 for i in range(num_particulas)]
 
 iteraciones = 0
 converge = False
-print_matrix(swarm)
+#print_matrix(swarm)
+#print(funcion([-356, -356]))
 while not converge:
     iteraciones += 1
     prom = fitness_array(swarm)
@@ -102,13 +110,16 @@ while not converge:
     # Factibilidad: indica la probabilidad de pasar a la siguiente etapa.
     # También para identificar el numero de copias directas.
     for i in swarm:
+        print("FITNESS : ",i.fitness)
+        print("PROM : ",prom)
         i.factibilidad = abs(i.fitness) / prom
-        #print(i.factibilidad)
-
+        print("FACTIBILIDAD : ",i.factibilidad)
+    print("-----------------------MATRIX X----------------------")
+    print_matrix(swarm)
     # Pasar directamente en los que la factibilidad es mayor o igual a 1
     iterador = 0 #para indicar el numero de plazas disponibles
     pos_ruleta = 0 # indica las posiciones de la ruleta
-    
+    swarm_better = []
     for i in swarm:
         if i.factibilidad > 1:
             num_directas = math.floor(i.factibilidad)
@@ -156,16 +167,16 @@ while not converge:
                 #print("Longitud arr : ",len(swarm_better[i].posx))
                 rand = random.randrange(0,8)
                 val_x = swarm_better[i].posx[0:rand] + swarm_better[i+1].posx[rand:]
-                print(val_x)
+                #print(val_x)
                 val_y = swarm_better[i].posy[0:rand] + swarm_better[i+1].posy[rand:]
-                print(val_y)
+                #print(val_y)
                 crom = Cromosoma(dimensiones)
                 crom.update(val_x,val_y)
 
                 swarm_better[i] = crom
                 swarm_better[i+1] = crom
 
-                print("Longitud new arr : ",len(val_x)) 
+                #print("Longitud new arr : ",len(val_x)) 
 
     ##################### MUTACION ###########################
     for i in swarm_better:
@@ -175,22 +186,29 @@ while not converge:
             #print("Mutando")
             pos = random.randrange(0,10)
             #print("Pos Mut : ",pos)
-            #i.posx = i.posx[0:pos-1]+"1"+i.posx[pos:] if i.posx[pos] == "0" else i.posx[0:pos-1]+"0"+i.posx[pos:]
-            #i.posy = i.posy[0:pos-1]+"1"+i.posy[pos:] if i.posy[pos] == "0" else i.posy[0:pos-1]+"0"+i.posy[pos:]
+            val_x = list(i.posx)
+            val_x[pos] = '1' if val_x[pos] == '0' else '0'
+            i.posx = "".join(val_x)
+            val_y = list(i.posy)
+            val_y[pos] = '1' if val_y[pos] == '0' else '0'
+            i.posy = "".join(val_y)
+            #i.posx = i.posx[0:pos-2]+"1"+i.posx[pos:] if i.posx[pos] == "0" else i.posx[0:pos-2]+"0"+i.posx[pos:]
+            #i.posy = i.posy[0:pos-2]+"1"+i.posy[pos:] if i.posy[pos] == "0" else i.posy[0:pos-2]+"0"+i.posy[pos:]
              
             #print("POS X LEN : ",len(i.posx))
             #print("POS Y LEN : ",len(i.posy))
             
     swarm = swarm_better
-    swarm_better = []
+    #swarm_better = []
     #print(swarm_better)
-    print_matrix(swarm)
+    #print("-----------------------MATRIX XP----------------------")
+    #print_matrix(swarm)
     #print_matrix(swarm_better)
-    converge = convergen(swarm)
-    print("LEN ",len(swarm))
+    converge = conve(swarm)
+    #print("LEN ",len(swarm))
     if len(swarm) == 0:
         converge = True
-    if iteraciones == max_num_iteraciones:
+    if iteraciones == 10:
         converge = True
 
 print_matrix(swarm)

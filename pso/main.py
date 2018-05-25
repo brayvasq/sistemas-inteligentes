@@ -10,11 +10,11 @@ min_value = -500
 # the maximum possible value x or y can take
 max_value = 500
 # the number of particles in the swarm
-number_of_particles = 10
+number_of_particles = 6
 # number of times the algorithm moves each particle in the problem space
 number_of_iterations = 2000
 
-w = 0.729    # inertia
+w = 0.4    # inertia
 c1 = 1.49 # cognitive (particle)
 c2 = 1.49 # social (swarm)
 
