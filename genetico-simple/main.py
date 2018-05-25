@@ -2,11 +2,11 @@ import random
 import sys
 import math
 
-num_particulas = 6
+num_particulas = 10
 dimensiones = 2
-max_num_iteraciones = 10000
+max_num_iteraciones = 100000
 probabilida_comb = 0.6
-prob_mut = 0.0001
+prob_mut = 0.001
 
 def funcion(x):
     #                 x -            y + 7
@@ -55,6 +55,18 @@ def print_matrix(matrix):
             print("POSX : ",i.posx," POS Y : ",i.posy,"VAL X : ",i.valx," VAL Y : ",i.valy," FITNESS : ",i.fitness," FACT : ",i.factibilidad)
     print("-> END")
 
+def print_best(matrix):
+    
+    min = 9999999999999
+    min_ob = None
+    for i in matrix:
+        if i != None and i.fitness < min:
+            min_ob = i
+    if min_ob != None:
+        print("-> START MIN")
+        print("POSX : ",min_ob.posx," POS Y : ",min_ob.posy,"VAL X : ",min_ob.valx," VAL Y : ",min_ob.valy," FITNESS : ",min_ob.fitness," FACT : ",min_ob.factibilidad)
+        print("-> END MIN")
+
 class Cromosoma:
     def __init__(self,dimensiones):
         self.posx = get_binary()
@@ -101,6 +113,7 @@ converge = False
 #print(funcion([-356, -356]))
 while not converge:
     iteraciones += 1
+    print("Iteraciones : ",iteraciones)
     prom = fitness_array(swarm)
     
     #print(prom)
@@ -110,12 +123,13 @@ while not converge:
     # Factibilidad: indica la probabilidad de pasar a la siguiente etapa.
     # También para identificar el numero de copias directas.
     for i in swarm:
-        print("FITNESS : ",i.fitness)
-        print("PROM : ",prom)
+        #print("FITNESS : ",i.fitness)
+        #print("PROM : ",prom)
         i.factibilidad = abs(i.fitness) / prom
-        print("FACTIBILIDAD : ",i.factibilidad)
+        #print("FACTIBILIDAD : ",i.factibilidad)
     print("-----------------------MATRIX X----------------------")
     print_matrix(swarm)
+    print_best(swarm)
     # Pasar directamente en los que la factibilidad es mayor o igual a 1
     iterador = 0 #para indicar el numero de plazas disponibles
     pos_ruleta = 0 # indica las posiciones de la ruleta
@@ -162,7 +176,7 @@ while not converge:
         #print("Iterando en  I : ",i)
         pr = random.randrange(0,10)/10
         #print("Probabilidad : ",pr)
-        if pr >= probabilida_comb:
+        if pr <= probabilida_comb:
             if len(swarm_better) == num_particulas:
                 #print("Longitud arr : ",len(swarm_better[i].posx))
                 rand = random.randrange(0,8)
@@ -208,10 +222,11 @@ while not converge:
     #print("LEN ",len(swarm))
     if len(swarm) == 0:
         converge = True
-    if iteraciones == 10:
+    if iteraciones == max_num_iteraciones:
         converge = True
 
-print_matrix(swarm)
+#print("-----------------------MATRIX XP----------------------")
+#print_matrix(swarm)
 
 
 
