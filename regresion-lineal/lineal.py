@@ -6,8 +6,11 @@
 """
 import math
 
-xarray = [1, 2, 3, 4, 5]
-yarray = [5, 5, 5, 6.8, 9]
+#xarray = [1, 2, 3, 4, 5]
+#yarray = [5, 5, 5, 6.8, 9]
+#((1, 0, 0), 1), ((1, 0, 1), 1), ((1, 1, 0), 1), ((1, 1, 1), 0)
+xarray = [1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1]
+yarray = [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1]
 x = y = xy = xx = a = b = resultado = 0
 cantidad = len(xarray)
 futuro = 100;
